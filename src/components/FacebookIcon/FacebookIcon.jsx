@@ -27,7 +27,7 @@ const FacebookIcon = () => {
           id="g19">
           <g
             id="g21"
-            clip-path="url(#clipPath25)">
+            clipPath="url(#clipPath25)">
             <g
               id="g27"
               transform="translate(600,350)">
