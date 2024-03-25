@@ -4,6 +4,7 @@ import { COLORS } from '../../theme';
 import { Link } from 'react-router-dom';
 import { Rotate, Slide } from 'react-awesome-reveal';
 
+
 const HomePage = () => {
   return (
     <Flex
