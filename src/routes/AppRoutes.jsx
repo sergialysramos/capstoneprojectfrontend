@@ -4,6 +4,7 @@ import HomePage from "../pages/HomePage/HomePage";
 import ServicesPage from "../pages/ServicesPage/ServicesPage";
 import ReservationsPage from "../pages/ReservationsPage/ReservationsPage";
 import LocationPage from "../pages/LocationPage/LocationPage";
+import LoginPage from "../pages/LoginPage/LoginPage";
 
 
 const AppRoutes = () => {
@@ -27,6 +28,10 @@ const AppRoutes = () => {
                 {
                     path: '/location',
                     element: <LocationPage />
+                },
+                {
+                    path: '/login',
+                    element: <LoginPage />
                 }
             ]
         }

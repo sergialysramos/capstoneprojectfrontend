@@ -16,6 +16,7 @@ const HomePage = () => {
       backgroundSize="cover"
       backgroundPosition="center"
       padding="100px"
+      marginTop={'140px'}
       style={{ 
         maskImage: 'linear-gradient(to bottom, transparent, black 1%)',
         maskPosition: 'top',

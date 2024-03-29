@@ -1,9 +1,9 @@
-import React from 'react'
-import Logo from '../Logos/Logo'
-import { useLocation } from 'react-router-dom'
-import { Flex, Text } from '@chakra-ui/react'
-import { COLORS } from '../../theme'
-import CustomLink from '../CustomLink/CustomLink'
+import React from 'react';
+import Logo from '../Logos/Logo';
+import { useLocation } from 'react-router-dom';
+import { Flex, Text } from '@chakra-ui/react';
+import { COLORS } from '../../theme';
+import CustomLink from '../CustomLink/CustomLink';
 import SpinningText from '../SpinningText/SpinningText';
 
 const Navbar = () => {
@@ -11,20 +11,26 @@ const Navbar = () => {
         { link: '/', text: 'inicio' },
         { link: '/services', text: 'servicios' },
         { link: '/reservations', text: 'reservas' },
-        { link: '/location', text: 'ubicación' }
+        { link: '/location', text: 'ubicación' },
+        { link: '/login', text: 'iniciar sesión' }
     ]
 
     const location = useLocation();
 
     return (
-        <Flex padding={'10px 50px'}
+        <Flex
+            padding={'10px 50px'}
             justifyContent={'space-between'}
-            alignItems={'center'}>
-                
+            alignItems={'center'}
+            position="fixed"
+            top={0}
+            width="100%"
+            zIndex={999}
+            backgroundColor={'rgba(0, 0, 0, 0.9)'} 
+        >
             <CustomLink to="/">
-                
-                <SpinningText  text="Mustach • Barbershop • ">
-                <Logo color={COLORS.PRIMARY} />
+                <SpinningText text="Mustach • Barbershop • ">
+                    <Logo color={COLORS.PRIMARY} />
                 </SpinningText>
             </CustomLink>
 
@@ -49,3 +55,4 @@ const Navbar = () => {
 }
 
 export default Navbar;
+

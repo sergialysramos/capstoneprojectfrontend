@@ -41,6 +41,7 @@ const ServicesPage = () => {
         backgroundSize="cover"
         backgroundPosition="center"
         padding="30px"
+        marginTop={'150px'}
         style={{
           maskImage: 'linear-gradient(to bottom, transparent, black 1%)',
           maskPosition: 'top'
