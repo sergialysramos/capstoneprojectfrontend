@@ -4,13 +4,14 @@ import PageWrapper from '../../components/PageWrapper/PageWrapper'
 import Title from '../../components/Title/Title'
 import { Flex } from '@chakra-ui/react'
 import { AuthContext } from '../../contexts/AuthContext'
+import AppointmentsTable from '../../components/BarberAppointmentsTable/BarberAppointmentsTable'
 
 
 
 const ProfilePage = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const { username, email, avatar, phone } = user
-    
+
     const handleUserEdit = () => { }
     const handleUserDeletion = () => { }
 
@@ -18,16 +19,17 @@ const ProfilePage = () => {
 
     return (
         <PageWrapper>
-        <Flex flexDir={"column"} gap={"44px"}>
-            <Title>Bienvenido {username}!</Title>
-            <ProfileBanner
-            username={username}
-            email={email}
-            avatar={avatar}
-            phone={phone}
-            handleUserDeletion={handleUserDeletion}
-            handleUserEdit={handleUserEdit} />
-        </Flex>
+            <Flex flexDir={"column"} gap={"44px"}>
+                <Title>Bienvenido {username}!</Title>
+                <ProfileBanner
+                    username={username}
+                    email={email}
+                    avatar={avatar}
+                    phone={phone}
+                    handleUserDeletion={handleUserDeletion}
+                    handleUserEdit={handleUserEdit} />
+                    <AppointmentsTable />
+            </Flex>
         </PageWrapper>
     )
 }

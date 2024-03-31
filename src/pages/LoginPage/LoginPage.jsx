@@ -1,8 +1,8 @@
 import React, { useState, useContext } from 'react'
 import FormPageLayout from '../../components/FormPageLayout/FormPageLayout'
 import CustomForm from '../../components/CustomForm/CustomForm'
-import { Box } from '@chakra-ui/react'
 import { AuthContext } from '../../contexts/AuthContext'
+import PageWrapper from '../../components/PageWrapper/PageWrapper'
 
 
 const LoginPage = () => {
@@ -26,7 +26,7 @@ const LoginPage = () => {
     }
 
     return (
-        <Box padding={'100px'} >
+        <PageWrapper>
             <FormPageLayout backgroundImage={BACKGROUND_IMAGE}>
                 <CustomForm
 
@@ -37,7 +37,7 @@ const LoginPage = () => {
                     options={["email", "password"]}
                 />
             </FormPageLayout>
-        </Box>
+        </PageWrapper>
     )
 }
 

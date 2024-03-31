@@ -38,9 +38,11 @@ const AppRoutes = () => {
                 },
                 {
                     path: '/profile',
-                    element: <AuthMiddleware>
+                    element:( 
+                    <AuthMiddleware>
                         <ProfilePage />
                     </AuthMiddleware>
+                    ),
                 },
                 {
                     path: '*',

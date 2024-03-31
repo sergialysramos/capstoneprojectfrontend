@@ -15,8 +15,7 @@ const Navbar = () => {
         { link: '/', text: 'inicio' },
         { link: '/services', text: 'servicios' },
         { link: '/reservations', text: 'reservas' },
-        { link: '/location', text: 'ubicación' },
-        { link: '/login', text: 'Login' }
+        { link: '/location', text: 'ubicación' }
     ]
 
     const location = useLocation();
@@ -38,7 +37,7 @@ const Navbar = () => {
                 </SpinningText>
             </CustomLink>
 
-            <Flex gap={'60px'} >
+            <Flex gap={'30px'} >
                 {NAVIGATION_LINK.map(({ link, text }) => {
                     const isActiveLink = location.pathname === link;
                     return (

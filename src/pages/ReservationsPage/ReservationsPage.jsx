@@ -5,6 +5,7 @@ import moment from 'moment';
 import 'moment/locale/es'; // Importa el idioma español
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Zoom } from 'react-awesome-reveal';
+import PageWrapper from '../../components/PageWrapper/PageWrapper';
 
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
@@ -39,15 +40,7 @@ const ReservationsPage = () => {
   };
 
   return (
-    <Box 
-      width={'90%'} 
-      backgroundColor={'rgba(50, 50, 50, 0.8)'} 
-      margin={'0 auto'} 
-      padding={'70px'} 
-      borderRadius={'10px'} 
-      marginTop={'150px'}
-      marginBottom={'100px'}
-    >
+      <PageWrapper>
       <Flex>
         {/* Contenedor de la imagen en el lado izquierdo */}
         <Box 
@@ -93,7 +86,7 @@ const ReservationsPage = () => {
           </div>
         </Box>
       </Flex>
-    </Box>
+      </PageWrapper>
   );
 };
 

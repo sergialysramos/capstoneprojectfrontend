@@ -1,6 +1,5 @@
 import { Avatar, Box, Flex, Text } from "@chakra-ui/react"
 import EditPenIcon from "../EditPenIcon/EditPenIcon"
-import DeleteIcon from "../DeleteIcon/DeleteIcon"
 
 const ProfileBanner = ({
     avatar,
@@ -12,15 +11,16 @@ const ProfileBanner = ({
     return (
         <Flex justifyContent={"center"}>
             <Flex
-                w={"50%"}
+                w={"100%"}
                 maxW={"1280px"}
                 minH={"450px"}
                 padding={"80px 52px"}
                 alignItems={"center"}
+                border={'3px solid'}
                 borderRadius={"30px"}
                 position={"relative"}
                 gap={"80px"}
-                boxShadow={"0px 0px 5px 0px rgba(0, 0, 0, 0.25);"}
+                boxShadow={"0px 0px 5px 0px rgba(255, 255, 255, 0.25);"}
             >
                 <Avatar width={"290px"} height={"290px"} src={avatar} />
                 <Flex flexDir={"column"} gap={"25px"}>
