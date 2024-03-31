@@ -7,7 +7,7 @@ import 'react-big-calendar/lib/css/react-big-calendar.css';
 import { Zoom } from 'react-awesome-reveal';
 import PageWrapper from '../../components/PageWrapper/PageWrapper';
 
-const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
 
 const ReservationsPage = () => {
   const localizer = momentLocalizer(moment);
