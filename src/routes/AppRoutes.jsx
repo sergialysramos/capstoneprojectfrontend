@@ -5,6 +5,9 @@ import ServicesPage from "../pages/ServicesPage/ServicesPage";
 import ReservationsPage from "../pages/ReservationsPage/ReservationsPage";
 import LocationPage from "../pages/LocationPage/LocationPage";
 import LoginPage from "../pages/LoginPage/LoginPage";
+import ProfilePage from "../pages/ProfilePage/ProfilePage";
+import NotFoundPage from "../pages/NotFoundPage/NotFoundPage";
+import AuthMiddleware from "../middleware/AuthMiddleware";
 
 
 const AppRoutes = () => {
@@ -12,7 +15,7 @@ const AppRoutes = () => {
         {
             path: '/',
             element: <Layout />,
-            children:[
+            children: [
                 {
                     path: '/',
                     element: <HomePage />
@@ -32,6 +35,16 @@ const AppRoutes = () => {
                 {
                     path: '/login',
                     element: <LoginPage />
+                },
+                {
+                    path: '/profile',
+                    element: <AuthMiddleware>
+                        <ProfilePage />
+                    </AuthMiddleware>
+                },
+                {
+                    path: '*',
+                    element: <NotFoundPage />
                 }
             ]
         }

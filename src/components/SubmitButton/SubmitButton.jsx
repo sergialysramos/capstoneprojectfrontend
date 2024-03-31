@@ -1,11 +1,12 @@
 import { Button as ChakraButton } from "@chakra-ui/react"
 import React from "react"
+import { COLORS } from "../../theme"
 
 const SubmitButton = () => {
     return (
         <ChakraButton
             _hover={{
-                backgroundColor: "brown",
+                backgroundColor: COLORS.PRIMARY,
             }}
             minH={"56px"}
             width={"100%"}

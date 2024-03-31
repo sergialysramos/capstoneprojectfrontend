@@ -1,18 +1,22 @@
 import React from 'react';
 import Logo from '../Logos/Logo';
 import { useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../contexts/AuthContext';
 import { Flex, Text } from '@chakra-ui/react';
 import { COLORS } from '../../theme';
 import CustomLink from '../CustomLink/CustomLink';
 import SpinningText from '../SpinningText/SpinningText';
+import AuthLink from '../AuthLink/AuthLink';
 
 const Navbar = () => {
+    const { user, logout } = useContext(AuthContext)
     const NAVIGATION_LINK = [
         { link: '/', text: 'inicio' },
         { link: '/services', text: 'servicios' },
         { link: '/reservations', text: 'reservas' },
         { link: '/location', text: 'ubicación' },
-        { link: '/login', text: 'iniciar sesión' }
+        { link: '/login', text: 'Login' }
     ]
 
     const location = useLocation();
@@ -26,7 +30,7 @@ const Navbar = () => {
             top={0}
             width="100%"
             zIndex={999}
-            backgroundColor={'rgba(0, 0, 0, 0.9)'} 
+            backgroundColor={'rgba(0, 0, 0, 0.9)'}
         >
             <CustomLink to="/">
                 <SpinningText text="Mustach • Barbershop • ">
@@ -49,6 +53,18 @@ const Navbar = () => {
                         </CustomLink>
                     );
                 })}
+            </Flex>
+            <Flex gap={"20px"}>
+                {user ? (
+                    <>
+                        <AuthLink to={"/profile"}>Profile</AuthLink>
+                        <AuthLink onClick={logout}>Logout</AuthLink>
+                    </>
+                ) : (
+                        <>
+                            <AuthLink to={"/login"}>Login</AuthLink>
+                        </>
+                    )}
             </Flex>
         </Flex>
     )

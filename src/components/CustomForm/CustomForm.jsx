@@ -31,7 +31,7 @@ const CustomForm = ({
                                 name={option}
                                 onChange={onChange}
                                 key={option}
-                                placeholder={(option)} // CAPITALIZED!!! "name" => "Name"
+                                placeholder={(option)} 
                             />
                         )
                     })}

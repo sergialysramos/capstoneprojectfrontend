@@ -5,10 +5,10 @@ class AuthService extends AxiosConfig {
         super("auth")
     }
 
-    async signup(data) {
-        const response = await this.axios.post("/signup", data)
-        return response.data
-    }
+    // async signup(data) {
+    //     const response = await this.axios.post("/signup", data)
+    //     return response.data
+    // }
 
     async login(data) {
         const response = await this.axios.post("/login", data)
