@@ -2,7 +2,6 @@ import React from 'react';
 import "./AppointmentsTable.css"
 
 const AppointmentsTable = ({ appointments }) => {
-    // Verifica si hay citas dentro del objeto antes de intentar acceder a ellas
     const appointmentList = appointments.appointments || [];
     return (
         <div className="table-container">
