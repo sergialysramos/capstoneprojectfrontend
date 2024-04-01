@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Box, Text, Flex } from '@chakra-ui/react';
-import data from '../../servicios.json';
-import { COLORS } from '../../theme';
 import { Slide } from 'react-awesome-reveal';
+import axios from 'axios';
+import { COLORS } from '../../theme';
 
 const ServicesPage = () => {
   const [cortesCabello, setCortesCabello] = useState([]);
@@ -10,20 +10,34 @@ const ServicesPage = () => {
   const [otrosServicios, setOtrosServicios] = useState([]);
 
   useEffect(() => {
-    setCortesCabello(data.corte_de_cabello);
-    setCortesBarba(data.corte_de_barba);
-    setOtrosServicios(data.otros_servicios);
+    obtenerDatosDesdeBackend();
   }, []);
+
+  const obtenerDatosDesdeBackend = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/api/services/getAllServices');
+      const servicios = response.data;
+      const corteCabelloData = servicios.filter(servicio => servicio.name.includes('Corte de pelo'));
+      const corteBarbaData = servicios.filter(servicio => servicio.name.includes('Afeitado de barba') || servicio.name.includes('Diseño de barba'));
+      const otrosServiciosData = servicios.filter(servicio => !(servicio.name.includes('Corte de pelo') || servicio.name.includes('Afeitado de barba') || servicio.name.includes('Diseño de barba')));
+
+      setCortesCabello(corteCabelloData);
+      setCortesBarba(corteBarbaData);
+      setOtrosServicios(otrosServiciosData);
+    } catch (error) {
+      console.error('Error al obtener los datos desde el backend:', error);
+    }
+  };
 
   const renderizarServicios = (image, servicios) => (
     <Slide>
       <Box p={7} borderWidth="1px" borderColor={COLORS.PRIMARY} borderRadius="md" mb={10} backgroundColor={'rgba(0,0,0, .65)'} >
         <Flex marginBottom={'30'} justifyContent={'center'}>{image}</Flex>
         {servicios.map(servicio => (
-          <Box key={servicio.id} mb={10}>
-            <Text fontSize={'20px'} mb={1} color={'white'} fontFamily={'Prata'} fontWeight={'bold'}>{servicio.nombre}</Text>
-            <Text fontSize={'15px'} color={'#e1dbc8'} fontFamily={'sans-serif'}>{servicio.descripcion}</Text>
-            <Text mt={1} fontFamily={'Prata'} color={COLORS.PRIMARY}>Precio: €{servicio.precio}</Text>
+          <Box key={servicio._id} mb={10}>
+            <Text fontSize={'20px'} mb={1} color={'white'} fontFamily={'Prata'} fontWeight={'bold'}>{servicio.name}</Text>
+            <Text fontSize={'15px'} color={'#e1dbc8'} fontFamily={'sans-serif'}>{servicio.description}</Text>
+            <Text mt={1} fontFamily={'Prata'} color={COLORS.PRIMARY}>Precio: €{servicio.price}</Text>
           </Box>
         ))}
       </Box>
