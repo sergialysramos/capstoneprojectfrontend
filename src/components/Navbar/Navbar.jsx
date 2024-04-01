@@ -37,7 +37,7 @@ const Navbar = () => {
                 </SpinningText>
             </CustomLink>
 
-            <Flex gap={'20px'} >
+            <Flex gap={'20px'} marginLeft="auto" marginRight="40px">
                 {NAVIGATION_LINK.map(({ link, text }) => {
                     const isActiveLink = location.pathname === link;
                     return (
@@ -48,7 +48,7 @@ const Navbar = () => {
                             fontWeight={isActiveLink ? 'bold' : 'normal'}
                             color={isActiveLink ? 'white' : COLORS.TERTIARY}
                         >
-                            <Text fontWeight={'bold'} fontFamily={'sans-serif'} textTransform={'uppercase'}>{text}</Text>
+                            <Text fontWeight={'bold'} fontSize={'15px'} fontFamily={'sans-serif'} textTransform={'uppercase'}>{text}</Text>
                         </CustomLink>
                     );
                 })}
@@ -70,4 +70,3 @@ const Navbar = () => {
 }
 
 export default Navbar;
-

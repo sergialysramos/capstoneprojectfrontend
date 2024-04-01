@@ -1,4 +1,4 @@
-import AxiosConfig from "./axios"
+import AxiosConfig from "./axios";
 
 class DataService extends AxiosConfig {
     constructor() {
@@ -18,7 +18,20 @@ class DataService extends AxiosConfig {
             throw error;
         }
     }
-    
+
+    async updateAppointmentStatus(token, appointmentId, status) {
+        try {
+            const response = await this.axios.put(`/updateAppointmentStatus/${appointmentId}`, { status }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            return response.data;
+        } catch (error) {
+            console.error("Error updating appointment status:", error);
+            throw error;
+        }
+    }
 }
 
 const dataService = new DataService();

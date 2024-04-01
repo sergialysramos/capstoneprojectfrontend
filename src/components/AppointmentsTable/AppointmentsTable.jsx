@@ -1,8 +1,14 @@
+// En el componente AppointmentsTable
 import React from 'react';
 import "./AppointmentsTable.css"
 
-const AppointmentsTable = ({ appointments }) => {
+const AppointmentsTable = ({ appointments, handleStatusUpdate }) => {
     const appointmentList = appointments.appointments || [];
+    
+    const handleClick = (appointmentId, status) => {
+        handleStatusUpdate(appointmentId, status);
+    };
+
     return (
         <div className="table-container">
             <table className="custom-table">
@@ -21,16 +27,14 @@ const AppointmentsTable = ({ appointments }) => {
                             <td>{appointment.customer}</td>
                             <td>{new Date(appointment.date).toLocaleString()}</td>
                             <td>{appointment.status}</td>
-                            <td><button>✅</button></td>
-                            <td><button>❌</button></td>
+                            <td><button className='confirmed' onClick={() => handleClick(appointment._id, 'confirmed')}>✅</button></td>
+                            <td><button className='cancelled' onClick={() => handleClick(appointment._id, 'cancelled')}>❌</button></td>
                         </tr>
                     ))}
                 </tbody>
             </table>
         </div>
     );
-
-
 };
 
 export default AppointmentsTable;

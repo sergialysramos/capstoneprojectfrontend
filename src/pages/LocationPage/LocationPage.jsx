@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Box, Flex, Grid, Text } from '@chakra-ui/react';
 import { JackInTheBox } from 'react-awesome-reveal';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
@@ -21,23 +21,6 @@ const LocationPage = () => {
     lng: -3.702034253838755
   }), []);
 
-  const [map, setMap] = useState(null);
-
-  useEffect(() => {
-    if (isLoaded && map !== null) {
-      map.setZoom(16); // Establece el nivel de zoom
-      map.setCenter(center); // Centra el mapa en la posición especificada
-    }
-  }, [isLoaded, map, center]);
-
-  const onLoad = React.useCallback(function callback(map) {
-    setMap(map);
-  }, []);
-
-  const onUnmount = React.useCallback(function callback() {
-    setMap(null);
-  }, []);
-
   return (
     <Box width={'90%'} backgroundColor={'rgba(67, 66, 65, 2)'} margin={'30px auto'} padding={'70px'} borderRadius={'10px'} marginTop={'150px'}>
       <Grid templateColumns="repeat(2, 1fr)" marginBottom={'100px'}>
@@ -57,8 +40,6 @@ const LocationPage = () => {
               center={center}
               zoom={16}
               mapContainerStyle={containerStyle}
-              onLoad={onLoad}
-              onUnmount={onUnmount}
             >
               <Marker position={center} />
             </GoogleMap>
@@ -70,3 +51,4 @@ const LocationPage = () => {
 };
 
 export default LocationPage;
+
