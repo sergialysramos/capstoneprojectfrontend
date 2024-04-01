@@ -6,6 +6,7 @@ import { Flex, Text } from '@chakra-ui/react';
 import { AuthContext } from '../../contexts/AuthContext';
 import AppointmentsTable from '../../components/AppointmentsTable/AppointmentsTable';
 import dataService from '../../services/data.service'
+import { COLORS } from '../../theme';
 
 const ProfilePage = () => {
     const { user } = useContext(AuthContext);
@@ -37,7 +38,7 @@ const ProfilePage = () => {
     return (
         <PageWrapper>
             <Flex flexDir={"column"} gap={"44px"}>
-                <Title>Bienvenido {username}!</Title>
+                <Title color={COLORS.PRIMARY}>Bienvenido {username}!</Title>
                 <ProfileBanner
                     username={username}
                     email={email}
@@ -46,7 +47,7 @@ const ProfilePage = () => {
                     handleUserDeletion={handleUserDeletion}
                     handleUserEdit={handleUserEdit}
                 />
-                <Text fontSize={'30px'} textAlign={'center'} color={'white'}>Tus Citas:</Text>
+                <Text fontSize={'30px'} textAlign={'center'} color={'white'} fontWeight={'bold'}>Tus Citas:</Text>
                 <AppointmentsTable appointments={appointments} />
             </Flex>
         </PageWrapper>

@@ -22,15 +22,15 @@ const ProfileBanner = ({
                 gap={"80px"}
                 boxShadow={"0px 0px 5px 0px rgba(255, 255, 255, 0.25);"}
             >
-                <Avatar width={"290px"} height={"290px"} src={avatar} />
+                <Avatar width={"180px"} height={"180px"} src={avatar} />
                 <Flex flexDir={"column"} gap={"25px"}>
-                    <Text fontSize={"32px"} fontWeight={"bold"}>
+                    <Text fontSize={"32px"} fontWeight={"bold"} color={'white'}>
                         Username: {username}
                     </Text>
-                    <Text fontSize={"32px"} fontWeight={"bold"}>
+                    <Text fontSize={"32px"} fontWeight={"bold"} color={'white'}>
                         Email: {email}
                     </Text>
-                    <Text fontSize={"32px"} fontWeight={"bold"}>
+                    <Text fontSize={"32px"} fontWeight={"bold"} color={'white'}>
                         Phone: {phone}
                     </Text>
                 </Flex>

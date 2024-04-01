@@ -10,6 +10,12 @@ class LocationPage extends Component {
   }
 
   initMap = () => {
+    // Eliminar cualquier script de la API de Google Maps existente
+    const existingScript = document.querySelector('[src^="https://maps.googleapis.com/maps/api/js"]');
+    if (existingScript) {
+      existingScript.remove();
+    }
+  
     const script = document.createElement('script');
     script.src = `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&libraries=places`;
     script.defer = true;
@@ -18,23 +24,23 @@ class LocationPage extends Component {
       console.error('Error al cargar el script de la API de Google Maps.');
     };
     
-
     script.onload = () => {
       // Aquí puedes utilizar la API de Google Maps, por ejemplo, crear el mapa y agregar marcadores
       const map = new window.google.maps.Map(document.getElementById('map'), {
         center: { lat: 40.40425297456302, lng: -3.702034253838755 },
         zoom: 16
       });
-
+  
       new window.google.maps.Marker({
         position: { lat: 40.40425297456302, lng: -3.702034253838755 },
         map: map,
         title: 'Barbershop Location'
       });
     };
-
+  
     document.head.appendChild(script);
   };
+  
 
   render() {
     return (

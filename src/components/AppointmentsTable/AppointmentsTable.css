@@ -9,6 +9,7 @@
 
 .custom-table th,
 .custom-table td {
-    padding: 10px;
-    border: 2px solid white;
+    padding: 20px;
+    border: 7px solid white;
+    background-color:gainsboro;
 }

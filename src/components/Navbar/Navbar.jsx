@@ -37,7 +37,7 @@ const Navbar = () => {
                 </SpinningText>
             </CustomLink>
 
-            <Flex gap={'30px'} >
+            <Flex gap={'20px'} >
                 {NAVIGATION_LINK.map(({ link, text }) => {
                     const isActiveLink = location.pathname === link;
                     return (
