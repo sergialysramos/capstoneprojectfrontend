@@ -5,6 +5,7 @@ import { Box, Flex, Text } from '@chakra-ui/react';
 import { Zoom } from 'react-awesome-reveal';
 import PageWrapper from '../../components/PageWrapper/PageWrapper';
 import moment from 'moment';
+import axios from 'axios';
 
 const ReservationsPage = () => {
   const [users, setUsers] = useState([]);
@@ -17,17 +18,15 @@ const ReservationsPage = () => {
 
   useEffect(() => {
     // Obtener todos los usuarios (barberos)
-    fetch('http://localhost:3001/api/user/getAllUsers')
-      .then(response => response.json())
-      .then(data => setUsers(data))
+    axios.get('http://localhost:3001/api/user/getAllUsers')
+      .then(response => setUsers(response.data))
       .catch(error => console.error('Error fetching users:', error));
   }, []);
 
   useEffect(() => {
     // Obtener todos los servicios
-    fetch('http://localhost:3001/api/services/getAllServices')
-      .then(response => response.json())
-      .then(data => setServices(data))
+    axios.get('http://localhost:3001/api/services/getAllServices')
+      .then(response => setServices(response.data))
       .catch(error => console.error('Error fetching services:', error));
   }, []);
 
@@ -43,10 +42,8 @@ const ReservationsPage = () => {
     setSelectedDate(date);
     const formattedDate = moment(date).format('YYYY-MM-DD');
     // Realizar la consulta para obtener las citas del barbero seleccionado para la fecha seleccionada
-    fetch(`http://localhost:3001/api/appointment/barberAppointments?user_id=${selectedUser._id}&date=${formattedDate}`)
-      .then(response => response.json())
-      .then(data => {
-        setAppointments(data)})
+    axios.get(`http://localhost:3001/api/appointment/barberAppointments?user_id=${selectedUser._id}&date=${formattedDate}`)
+      .then(response => setAppointments(response.data))
       .catch(error => console.error('Error fetching appointments:', error));
   };
 
