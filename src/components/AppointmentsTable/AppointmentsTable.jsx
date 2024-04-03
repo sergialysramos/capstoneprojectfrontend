@@ -26,7 +26,7 @@ const AppointmentsTable = ({ appointments, handleStatusUpdate }) => {
                         <tr key={appointment._id}>
                             <td>{appointment.customer}</td>
                             <td>{new Date(appointment.date).toLocaleString()}</td>
-                            <td>{appointment.status}</td>
+                            <td className={appointment.status}>{appointment.status}</td>
                             <td><button className='confirmed' onClick={() => handleClick(appointment._id, 'confirmed')}>✅</button></td>
                             <td><button className='cancelled' onClick={() => handleClick(appointment._id, 'cancelled')}>❌</button></td>
                         </tr>

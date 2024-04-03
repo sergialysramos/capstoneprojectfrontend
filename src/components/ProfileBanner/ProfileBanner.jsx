@@ -25,13 +25,13 @@ const ProfileBanner = ({
                 <Avatar width={"180px"} height={"180px"} src={avatar} />
                 <Flex flexDir={"column"} gap={"25px"}>
                     <Text fontSize={"32px"} fontWeight={"bold"} color={'white'}>
-                        Username: {username}
+                        Nombre: {username}
                     </Text>
                     <Text fontSize={"32px"} fontWeight={"bold"} color={'white'}>
                         Email: {email}
                     </Text>
                     <Text fontSize={"32px"} fontWeight={"bold"} color={'white'}>
-                        Phone: {phone}
+                        Teléfono: {phone}
                     </Text>
                 </Flex>
                 <Flex gap={"18px"} position={"absolute"} top={"24px"} right={"24px"}>

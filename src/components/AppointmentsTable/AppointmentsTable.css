@@ -16,3 +16,22 @@
     background-color:gainsboro;
     border-radius: 20px;
 }
+
+.pending,
+.confirmed,
+.cancelled {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.pending {
+    color: yellow;
+}
+
+.confirmed {
+    color: green;
+}
+
+.cancelled {
+    color: red;
+}

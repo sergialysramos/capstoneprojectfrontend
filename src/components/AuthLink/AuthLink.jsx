@@ -6,8 +6,8 @@ const AuthLink = ({ onClick, children, to }) => {
         <CustomLink
             onClick={onClick}
             borderRadius="30px"
-            padding={"10px 20px"}
-            backgroundColor={"white"}
+            padding={"6px 15px"}
+            backgroundColor={"#E2E2E2"}
             color={"black"}
             to={to}
         >
