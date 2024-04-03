@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Text, Button } from '@chakra-ui/react';
 import { Zoom } from 'react-awesome-reveal';
 import PageWrapper from '../../components/PageWrapper/PageWrapper';
 import moment from 'moment';
 import axios from 'axios';
+import AppointmentModal from '../../components/AppointmentModal/AppointmentModal';
 
 const ReservationsPage = () => {
   const [users, setUsers] = useState([]);
@@ -15,6 +16,9 @@ const ReservationsPage = () => {
   const [selectedDate, setSelectedDate] = useState(null);
   const [appointments, setAppointments] = useState([]);
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
+  const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
 
   useEffect(() => {
     // Obtener todos los usuarios (barberos)
@@ -37,7 +41,6 @@ const ReservationsPage = () => {
   const handleServiceSelect = (service) => {
     setSelectedService(service);
   };
-
   const handleDateSelect = (date) => {
     setSelectedDate(date);
     const formattedDate = moment(date).format('YYYY-MM-DD');
@@ -73,11 +76,50 @@ const ReservationsPage = () => {
           return appointmentStart <= slotStart && appointmentEnd >= slotEnd;
         });
       });
-
       setAvailableTimeSlots(filteredTimeSlots);
     }
   }, [selectedUser, selectedDate, appointments]);
 
+  const handleTimeSlotSelect = (timeSlot) => {
+    setSelectedTimeSlot(timeSlot);
+    setIsModalOpen(true);
+  };
+
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCreateAppointment = async (formData) => {
+    try {
+      if (!selectedUser || !selectedService || !selectedDate || !selectedTimeSlot) {
+        console.error('User, service, date, or time slot not selected.');
+        return;
+      }
+
+      const formattedDate = moment(selectedDate).format('YYYY-MM-DD');
+      const formattedDateTime = moment.utc(`${formattedDate}T${selectedTimeSlot}`).toISOString();
+
+      const requestData = {
+        user: selectedUser._id,
+        service: selectedService._id,
+        date: formattedDateTime,
+        customerEmail: formData.email,
+        customerName: formData.name,
+        customerPhone: formData.phone
+      };
+
+      // Realizar la solicitud POST al backend
+      await axios.post('http://localhost:3001/api/appointment/createAppointment', requestData);
+
+      setIsModalOpen(false);
+
+      window.location.reload();
+
+    } catch (error) {
+      console.error('Error creating appointment:', error);
+    }
+  };
 
   return (
     <PageWrapper>
@@ -90,51 +132,90 @@ const ReservationsPage = () => {
             <Text textAlign={'center'} fontFamily={'sans-serif'} color={'rgba(244, 235, 163, 0.7)'}> +34 12 123 51 55.¡te esperamos!</Text>
           </Zoom>
         </Box>
-        <Box width={'50%'} backgroundColor={'whitesmoke'} textAlign={'center'} alignContent={'center'} alignItems={'center'} padding={'30px'}>
-          <div>
+        <Box
+          width={'50%'}
+          backgroundColor={'whitesmoke'}
+          textAlign={'center'}
+          padding={'40px'}
+          display={'flex'}
+          justifyContent={'center'}
+          alignItems={'center'}
+          height={'80vh'}
+        >
+          <Flex direction={'column'}>
             {selectedUser === null && (
-              <div>
-                <h2>Seleccione un barbero:</h2>
-                <ul>
+              <>
+                <Text fontSize={'40px'} padding={'40px'} fontWeight={'bold'}>Seleccione un barbero:</Text>
+                <Flex gap={'20px'} justifyContent={'center'}>
                   {users.map(user => (
-                    <li key={user._id} onClick={() => handleUserSelect(user)}>
+                    <Button backgroundColor={'black'} color={'white'} key={user._id} onClick={() => handleUserSelect(user)}>
                       {user.username}
-                    </li>
+                    </Button>
                   ))}
-                </ul>
-              </div>
-            )}
-            {selectedUser !== null && selectedService === null && (
-              <div>
-                <h2>Seleccione un servicio:</h2>
-                <ul>
+                </Flex>
+              </>
+            )}{selectedUser !== null && selectedService === null && (
+              <>
+                <Text fontSize={'40px'} padding={'40px'} fontWeight={'bold'}>Seleccione un servicio:</Text>
+                <Flex
+                  direction={'row'}
+                  justifyContent="center"
+                  flexWrap="wrap"
+                  gap="20px"
+                >
                   {services.map(service => (
-                    <li key={service._id} onClick={() => handleServiceSelect(service)}>
+                    <Button
+                      key={service._id}
+                      onClick={() => handleServiceSelect(service)}
+                      backgroundColor={'black'}
+                      color={'white'}
+                    >
                       {service.name}
-                    </li>
+                    </Button>
                   ))}
-                </ul>
-              </div>
+                </Flex>
+              </>
             )}
             {selectedUser !== null && selectedService !== null && (
-              <div>
-                <h2>Seleccione una fecha:</h2>
-                <DatePicker
-                  selected={selectedDate}
-                  onChange={date => handleDateSelect(date)}
-                  inline
-                />
+              <>
+                <Text fontSize={'40px'} padding={'40px'} fontWeight={'bold'}>Seleccione una fecha:</Text>
+                <Flex justifyContent={'center'}>
+                  <DatePicker
+                    selected={selectedDate}
+                    onChange={date => handleDateSelect(date)}
+                    inline
+                    backgroundColor={'black'}
+                  />
+                </Flex>
 
-                {/* Mostrar los horarios disponibles */}
-                <h3>Horarios Disponibles:</h3>
-                <ul>
+                <Text fontSize={'20px'} padding={'20px'} fontWeight={'bold'}>Horarios Disponibles:</Text>
+                <Flex
+                  direction={'row'}
+                  justifyContent="center"
+                  flexWrap="wrap" 
+                  gap="20px"
+                >
                   {availableTimeSlots.map(slot => (
-                    <li key={slot}>{slot}</li>
+                    <Button
+                      key={slot}
+                      onClick={() => handleTimeSlotSelect(slot)}
+                      backgroundColor={'black'}
+                      color={'white'}
+                    >
+                      {slot}
+                    </Button>
                   ))}
-                </ul>
-              </div>
+                </Flex>
+
+                {/* Modal para crear cita */}
+                <AppointmentModal
+                  isOpen={isModalOpen}
+                  onClose={handleCloseModal}
+                  onCreateAppointment={handleCreateAppointment}
+                />
+              </>
             )}
-          </div>
+          </Flex>
         </Box>
       </Flex>
     </PageWrapper>
