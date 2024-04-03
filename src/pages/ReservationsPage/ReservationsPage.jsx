@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Box, Flex, Text, Button } from '@chakra-ui/react';
+import { Box, Flex, Text, Button, useToast } from '@chakra-ui/react';
 import { Zoom } from 'react-awesome-reveal';
 import PageWrapper from '../../components/PageWrapper/PageWrapper';
 import moment from 'moment';
@@ -18,6 +18,7 @@ const ReservationsPage = () => {
   const [availableTimeSlots, setAvailableTimeSlots] = useState([]);
   const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const toast = useToast();
 
 
   useEffect(() => {
@@ -114,10 +115,27 @@ const ReservationsPage = () => {
 
       setIsModalOpen(false);
 
-      window.location.reload();
+      toast({
+        title: "Cita creada",
+        description: "Tu cita ha sido creada exitosamente.",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
 
     } catch (error) {
       console.error('Error creating appointment:', error);
+      toast({
+        title: "Error",
+        description: "Hubo un error al crear la cita. Por favor, inténtalo de nuevo más tarde.",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
     }
   };
 
@@ -140,7 +158,7 @@ const ReservationsPage = () => {
           display={'flex'}
           justifyContent={'center'}
           alignItems={'center'}
-          height={'80vh'}
+          height={'auto'}
         >
           <Flex direction={'column'}>
             {selectedUser === null && (
